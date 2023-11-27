@@ -12,6 +12,13 @@ use Illuminate\Support\Facades\Storage;
 
 class InvoicesDetailsController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('perimission:قائمة الفواتير', ['only' => ['index']]);
+        $this->middleware('perimission:عرض المرفق', ['only' => ['viewfile']]);
+        $this->middleware('perimission:تنزيل المرفق', ['only' => ['download']]);
+        $this->middleware('perimission:حذف المرفق', ['only' => ['destroy']]);
+    }
     public function index($id)
     {
         $details = Invoices::find($id);
@@ -26,6 +33,7 @@ class InvoicesDetailsController extends Controller
         $filepath = public_path("invoices/$invoice_number/$file_name") ;
         return response()->file($filepath);
     }
+
     public function download($invoice_number,$file_name)
     {
         $filepath = public_path("invoices/$invoice_number/$file_name") ;

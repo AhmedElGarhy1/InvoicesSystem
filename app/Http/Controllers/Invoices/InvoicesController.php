@@ -14,6 +14,19 @@ use Illuminate\Support\Facades\File;
 
 class InvoicesController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('perimission:قائمة الفواتير', ['only' => ['index']]);
+        $this->middleware('perimission:اضافة فاتورة', ['only' => ['create', 'store']]);
+        $this->middleware('perimission:تعديل فاتورة', ['only' => ['edit', 'update']]);
+        $this->middleware('perimission:الفواتير المدفوعة', ['only' => ['invoicepaid']]);
+        $this->middleware('perimission:الفواتير المدفوعة جزئية', ['only' => ['invoicepartpaid']]);
+        $this->middleware('perimission:الفواتير الغير مدفوعة', ['only' => ['invoiceunpaid']]);
+        $this->middleware('perimission:تغير حالة الدفع', ['only' => ['stateedit','stateupdate']]);
+        $this->middleware('perimission:حذف فاتورة', ['only' => ['destroy']]);
+        $this->middleware('perimission:طباعةالفاتورة', ['only' => ['PrintInvoice']]);
+    }
+
     public function index()
     {
         $invoice = Invoices::all();
@@ -113,6 +126,7 @@ class InvoicesController extends Controller
         $sections = Sections::all();
         return view('invoices.edit',compact('invoice','sections'));
     }
+
     public function update($id, Request $request)
     {
         $invoiceup = invoices::find($id);
@@ -170,6 +184,7 @@ class InvoicesController extends Controller
         $invoice = invoices::where('id',$id)->first();
         return view('invoices.status_update',compact('invoice'));
     }
+
     public function stateupdate($id,Request $request)
     {
         $invoice = Invoices::where('id',$id)->first();

@@ -41,13 +41,14 @@
 <div class="row row-sm">
     <div class="col-xl-12">
         <div class="card">
-            <div class="card-header pb-0">
-                <div class="col-sm-1 col-md-2">
-                    @can('اضافة مستخدم')
+            @can('اضافة مستخدم')
+                <div class="card-header pb-0">
+                    <div class="col-sm-1 col-md-2">
                         <a class="btn btn-primary btn-sm" href="{{ route('addusers') }}">اضافة مستخدم</a>
-                    @endcan
+                    </div>
                 </div>
-            </div>
+            @endcan
+
             <div class="card-body">
                 <div class="table-responsive hoverable-table">
                     <table class="table table-hover" id="example1" data-page-length='50' style=" text-align: center;">
@@ -87,12 +88,19 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{ route('editusers', $user->id) }}" class="btn btn-sm btn-info"
-                                            title="تعديل"><i class="las la-pen"></i></a>
-                                        <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
-                                            data-user_id="{{ $user->id }}" data-username="{{ $user->name }}"
-                                            data-toggle="modal" href="#modaldemo8" title="حذف"><i
-                                                class="las la-trash"></i></a>
+                                        @can('تعديل مستخدم')
+                                            <a href="{{ route('editusers', $user->id) }}" class="btn btn-sm btn-info"
+                                                title="تعديل"><i class="las la-pen"></i>
+                                            </a>
+                                        @endcan
+                                        @can('حذف مستخدم')
+                                            <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
+                                                data-user_id="{{ $user->id }}" data-username="{{ $user->name }}"
+                                                data-toggle="modal" href="#modaldemo8" title="حذف"><i
+                                                    class="las la-trash"></i>
+                                            </a>
+                                        @endcan
+
                                     </td>
                                 </tr>
                             @endforeach

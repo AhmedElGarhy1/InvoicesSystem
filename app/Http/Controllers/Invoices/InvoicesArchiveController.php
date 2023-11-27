@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\File;
 
 class InvoicesArchiveController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('perimission:ارشفة الفاتورة', ['only' => ['archiveinvoices']]);
+    }
+
 
     public function index()
     {

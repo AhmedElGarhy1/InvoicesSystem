@@ -21,6 +21,7 @@ use App\Http\Controllers\RoleController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+// check status
 
 Route::get('/', function () {
     return view('auth.login');
@@ -73,6 +74,10 @@ Route::prefix('invoices')->group(function () {
         Route::post('/restore', [InvoicesArchiveController::class, 'restoreinvoice'])->name('restoreinvoice');
         Route::post('/delete', [InvoicesArchiveController::class, 'destorearachive'])->name('archaveinvoicedelete');
     });
+
+    // print invoice
+    Route::get('/Print/{id}',[InvoicesController::class,'PrintInvoice'])->name('invoiceprint');
+
 });
 
 // sections
@@ -104,7 +109,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/show/{id}', [RoleController::class, 'show'])->name('showrole');
         Route::get('/edit/{id}', [RoleController::class, 'edit'])->name('editroles');
         Route::PATCH('/update/{id}', [RoleController::class, 'update'])->name('updateroles');
-        Route::post('/delete', [RoleController::class, 'destroy'])->name('deleteroles');
+        Route::delete('/delete/{id}', [RoleController::class, 'destroy'])->name('deleteroles');
     });
     // users
     Route::prefix('users')->group(function () {
@@ -113,7 +118,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/store', [UserController::class, 'store'])->name('storeusers');
         Route::get('/show/{id}', [UserController::class, 'show'])->name('showuser');
         Route::get('/edit/{id}', [UserController::class, 'edit'])->name('editusers');
-        Route::post('/update/{id}', [UserController::class, 'update'])->name('updateusers');
-        Route::post('/delete', [UserController::class, 'destroy'])->name('deleteusers');
+        Route::PATCH('/update/{id}', [UserController::class, 'update'])->name('updateusers');
+        Route::delete('/delete/{id}', [UserController::class, 'destroy'])->name('deleteusers');
     });
 });

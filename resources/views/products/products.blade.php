@@ -59,18 +59,21 @@
     <div class="row row-sm">
         <div class="col-xl-12">
             <div class="card mg-b-20">
-                <div class="card-header pb-0 ">
-                    <div class="row row-xs wd-xl-80p">
-                        <div class="col-sm-6 col-md-3 mg-t-10 mg-sm-t-0">
-                            <a class="modal-effect btn btn-primary btn-with-icon btn-block" data-effect="effect-scale"
-                                data-toggle="modal" href="#exampleModal">
-                                <i class="typcn typcn-plus">
-                                </i>
-                                اضافة منتج
-                            </a>
+                @can('اضافة منتج')
+                    <div class="card-header pb-0 ">
+                        <div class="row row-xs wd-xl-80p">
+                            <div class="col-sm-6 col-md-3 mg-t-10 mg-sm-t-0">
+                                <a class="modal-effect btn btn-primary btn-with-icon btn-block" data-effect="effect-scale"
+                                    data-toggle="modal" href="#exampleModal">
+                                    <i class="typcn typcn-plus">
+                                    </i>
+                                    اضافة منتج
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endcan
+
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table text-md-nowrap" id="example1">
@@ -91,11 +94,19 @@
                                         <td>{{ $product->section_name }}</td>
                                         <td>{{ $product->description }}</td>
                                         <td>
-                                            <a href="{{ route('productedit', $product->id) }}"
-                                                class="btn btn-outline-success btn-sm">تعديل</a>
-                                            <button class="btn btn-outline-danger btn-sm " data-pro_id="{{ $product->id }}"
+                                            @can('تعديل منتج')
+                                                <a href="{{ route('productedit', $product->id) }}"
+                                                    class="btn btn-outline-success btn-sm">تعديل
+                                                </a>
+                                            @endcan
+                                            @can('حذف منتج')
+                                                <button class="btn btn-outline-danger btn-sm "
+                                                    data-pro_id="{{ $product->id }}"
                                                     data-product_name="{{ $product->Product_name }}" data-toggle="modal"
-                                                    data-target="#modaldemo9">حذف</button>
+                                                    data-target="#modaldemo9">حذف
+                                                </button>
+                                            @endcan
+
 
                                         </td>
                                     </tr>

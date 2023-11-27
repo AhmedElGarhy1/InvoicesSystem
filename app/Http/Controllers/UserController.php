@@ -11,6 +11,14 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('perimission:قائمة المستخدمين', ['only' => ['index']]);
+        $this->middleware('perimission:اضافة مستخدم', ['only' => ['create', 'store']]);
+        $this->middleware('perimission:تعديل مستخدم', ['only' => ['edit', 'update']]);
+        $this->middleware('perimission:حذف مستخدم', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -32,7 +40,6 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::pluck('name', 'name')->all();
-
         return view('users.create', compact('roles'));
     }
     /**
@@ -57,7 +64,7 @@ class UserController extends Controller
 
         $user = User::create($input);
         $user->assignRole($request->input('roles_name'));
-        return redirect()->route('users.index')
+        return redirect()->route('listusers')
             ->with('success', 'تم اضافة المستخدم بنجاح');
     }
 
@@ -110,7 +117,7 @@ class UserController extends Controller
         $user->update($input);
         DB::table('model_has_roles')->where('model_id', $id)->delete();
         $user->assignRole($request->input('roles'));
-        return redirect()->route('users.index')
+        return redirect()->route('listusers')
             ->with('success', 'تم تحديث معلومات المستخدم بنجاح');
     }
     /**

@@ -68,15 +68,19 @@
                                         <td>{{ $data->section_name }}</td>
                                         <td>{{ $data->description }}</td>
                                         <td>
-                                            <a class="btn btn-sm btn-info" href="{{ route('sectionedit', $data->id) }}" title="تعديل">
-                                                <i
-                                                    class="las la-pen">
-                                                </i>
-                                            </a>
-                                            <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
-                                                data-id="{{ $data->id }}" data-section_name="{{ $data->section_name }}"
-                                                data-toggle="modal" href="#modaldemo9" title="حذف"><i
-                                                    class="las la-trash"></i></a>
+                                            @can('تعديل قسم')
+                                                <a class="btn btn-sm btn-info" href="{{ route('sectionedit', $data->id) }}"
+                                                    title="تعديل">
+                                                    <i class="las la-pen">
+                                                    </i>
+                                                </a>
+                                            @endcan
+                                            @can('حذف قسم')
+                                                <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
+                                                    data-id="{{ $data->id }}"
+                                                    data-section_name="{{ $data->section_name }}" data-toggle="modal"
+                                                    href="#modaldemo9" title="حذف"><i class="las la-trash"></i></a>
+                                            @endcan
                                         </td>
                                     </tr>
                                 @endforeach
@@ -93,10 +97,13 @@
     <div class="modal" id="modaldemo8">
         <div class="modal-dialog" role="document">
             <div class="modal-content modal-content-demo">
-                <div class="modal-header">
-                    <h6 class="modal-title">اضافة قسم</h6><button aria-label="Close" class="close" data-dismiss="modal"
-                        type="button"><span aria-hidden="true">&times;</span></button>
-                </div>
+                @can('اضافة قسم')
+                    <div class="modal-header">
+                        <h6 class="modal-title">اضافة قسم</h6><button aria-label="Close" class="close" data-dismiss="modal"
+                            type="button"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                @endcan
+
                 <div class="modal-body">
                     <form action="{{ route('sectionstore') }}" method="post">
                         @csrf
@@ -123,10 +130,11 @@
     <div class="modal" id="modaldemo9">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content modal-content-demo">
-                <div class="modal-header">
-                    <h6 class="modal-title">حذف القسم</h6><button aria-label="Close" class="close" data-dismiss="modal"
-                        type="button"><span aria-hidden="true">&times;</span></button>
-                </div>
+                    <div class="modal-header">
+                        <h6 class="modal-title">حذف القسم</h6><button aria-label="Close" class="close" data-dismiss="modal"
+                            type="button"><span aria-hidden="true">&times;</span></button>
+                    </div>
+
                 <form action="{{ Route('sectiondelete') }}" method="post">
                     {{--  {{ method_field('delete') }}
                     {{ csrf_field() }}  --}}

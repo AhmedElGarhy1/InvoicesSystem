@@ -11,6 +11,14 @@ use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('perimission:المنتجات', ['only' => ['index']]);
+        $this->middleware('perimission:اضافة منتج', ['only' => ['create', 'store']]);
+        $this->middleware('perimission:تعديل منتج', ['only' => ['edit', 'update']]);
+        $this->middleware('perimission:حذف منتج', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
         $product = DB::table('products')->join('sections','products.section_id','=','sections.id')

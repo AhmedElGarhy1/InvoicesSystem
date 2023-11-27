@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Traits\HasRoles;
+
 
 class RoleController extends Controller
 {
@@ -17,14 +19,13 @@ class RoleController extends Controller
      */
 
 
-    // function __construct()
-    // {
-
-    //     $this->middleware('permission:عرض صلاحية', ['only' => ['index']]);
-    //     $this->middleware('permission:اضافة صلاحية', ['only' => ['create', 'store']]);
-    //     $this->middleware('permission:تعديل صلاحية', ['only' => ['edit', 'update']]);
-    //     $this->middleware('permission:حذف صلاحية', ['only' => ['destroy']]);
-    // }
+    function __construct()
+    {
+        $this->middleware('perimission:عرض صلاحية', ['only' => ['index']]);
+        $this->middleware('perimission:اضافة صلاحية', ['only' => ['create', 'store']]);
+        $this->middleware('perimission:تعديل صلاحية', ['only' => ['edit', 'update']]);
+        $this->middleware('perimission:حذف صلاحية', ['only' => ['destroy']]);
+    }
 
 
 
@@ -62,9 +63,10 @@ class RoleController extends Controller
             'name' => 'required|unique:roles,name',
             'permission' => 'required',
         ]);
-        $role = Role::create(['name' => $request->input('name')]);
-        $role->syncPermissions($request->input('permission'));
-        return redirect()->route('roles.index')
+        // dd($request);
+        $role = Role::create(['name' => $request->name]);
+        $role->syncPermissions($request->permission);
+        return redirect()->route('listroles')
             ->with('success', 'Role created successfully');
     }
     /**
@@ -113,7 +115,7 @@ class RoleController extends Controller
         $role->name = $request->input('name');
         $role->save();
         $role->syncPermissions($request->input('permission'));
-        return redirect()->route('roles.index')
+        return redirect()->route('listroles')
             ->with('success', 'Role updated successfully');
     }
     /**
@@ -125,7 +127,7 @@ class RoleController extends Controller
     public function destroy($id)
     {
         DB::table("roles")->where('id', $id)->delete();
-        return redirect()->route('roles.index')
+        return redirect()->route('listroles')
             ->with('success', 'Role deleted successfully');
     }
 }

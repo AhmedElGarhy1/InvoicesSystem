@@ -3,7 +3,7 @@
 <!-- Internal Nice-select css  -->
 <link href="{{URL::asset('assets/plugins/jquery-nice-select/css/nice-select.css')}}" rel="stylesheet" />
 @section('title')
-تعديل مستخدم - مورا سوفت للادارة القانونية
+تعديل مستخدم
 @stop
 
 
@@ -43,11 +43,11 @@
             <div class="card-body">
                 <div class="col-lg-12 margin-tb">
                     <div class="pull-right">
-                        <a class="btn btn-primary btn-sm" href="{{ route('users.index') }}">رجوع</a>
+                        <a class="btn btn-primary btn-sm" href="{{ route('listusers') }}">رجوع</a>
                     </div>
                 </div><br>
 
-                {!! Form::model($user, ['method' => 'PATCH','route' => ['users.update', $user->id]]) !!}
+                {!! Form::model($user, ['method' => 'PATCH','route' => ['updateusers', $user->id]]) !!}
                 <div class="">
 
                     <div class="row mg-b-20">

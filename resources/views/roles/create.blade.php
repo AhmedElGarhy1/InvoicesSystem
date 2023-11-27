@@ -41,7 +41,7 @@
 
 
 
-{!! Form::open(array('route' => 'roles.store','method'=>'POST')) !!}
+{!! Form::open(array('route' => 'storeroles','method'=>'POST')) !!}
 <!-- row -->
 <div class="row">
     <div class="col-md-12">
@@ -64,7 +64,7 @@
                             </li>
                             @foreach($permission as $value)
                             <label
-                                style="font-size: 16px;">{{ Form::checkbox('permission[]', $value->id, false, array('class' => 'name')) }}
+                                style="font-size: 16px;">{{ Form::checkbox('permission[]', $value->name, false, array('class' => 'name')) }}
                                 {{ $value->name }}</label>
 
                             @endforeach

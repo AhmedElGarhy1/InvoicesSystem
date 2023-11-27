@@ -61,15 +61,16 @@
     <div class="col-xl-12">
         <div class="card">
             <div class="card-header pb-0">
-                <div class="d-flex justify-content-between">
-                    <div class="col-lg-12 margin-tb">
-                        <div class="pull-right">
+                @can('اضافة صلاحية')
+                    <div class="d-flex justify-content-between">
+                        <div class="col-lg-12 margin-tb">
+                            <div class="pull-right">
                                 <a class="btn btn-primary btn-sm" href="{{ route('addroles') }}">اضافة</a>
+                            </div>
                         </div>
+                        <br>
                     </div>
-                    <br>
-                </div>
-
+                @endcan
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -87,14 +88,19 @@
                                     <td>{{ ++$i }}</td>
                                     <td>{{ $role->name }}</td>
                                     <td>
-                                        <a class="btn btn-success btn-sm"
-                                            href="{{ route('showrole', $role->id) }}">عرض</a>
-                                        <a class="btn btn-primary btn-sm"
-                                            href="{{ route('editroles', $role->id) }}">تعديل</a>
-                                        {{--  {!! Form::open(['method' => 'DELETE', 'route' => ['roles.destroy',
-                                        $role->id], 'style' => 'display:inline']) !!}
-                                        {!! Form::submit('حذف', ['class' => 'btn btn-danger btn-sm']) !!}
-                                        {!! Form::close() !!}  --}}
+                                        @can('عرض صلاحية')
+                                            <a class="btn btn-success btn-sm"
+                                                href="{{ route('showrole', $role->id) }}">عرض</a>
+                                        @endcan
+                                        @can('تعديل صلاحية')
+                                            <a class="btn btn-primary btn-sm"
+                                                href="{{ route('editroles', $role->id) }}">تعديل</a>
+                                        @endcan
+                                        @can('حذف صلاحية')
+                                            {!! Form::open(['method' => 'DELETE', 'route' => ['deleteroles', $role->id], 'style' => 'display:inline']) !!}
+                                            {!! Form::submit('حذف', ['class' => 'btn btn-danger btn-sm']) !!}
+                                        @endcan
+                                        {!! Form::close() !!}
                                     </td>
                                 </tr>
                             @endforeach

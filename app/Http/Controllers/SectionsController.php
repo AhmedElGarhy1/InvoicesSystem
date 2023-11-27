@@ -9,6 +9,15 @@ use Illuminate\Support\Facades\Auth;
 
 class SectionsController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware('perimission:الاقسام', ['only' => ['index']]);
+        $this->middleware('perimission:اضافة قسم', ['only' => ['create', 'store']]);
+        $this->middleware('perimission:تعديل قسم', ['only' => ['edit', 'update']]);
+        $this->middleware('perimission:حذف قسم', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
         $sectionlist = Sections::all();
