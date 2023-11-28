@@ -20,7 +20,7 @@ class InvoicesController extends Controller
         $this->middleware('perimission:اضافة فاتورة', ['only' => ['create', 'store']]);
         $this->middleware('perimission:تعديل فاتورة', ['only' => ['edit', 'update']]);
         $this->middleware('perimission:الفواتير المدفوعة', ['only' => ['invoicepaid']]);
-        $this->middleware('perimission:الفواتير المدفوعة جزئية', ['only' => ['invoicepartpaid']]);
+        $this->middleware('perimission:الفواتير المدفوعة جزئيا', ['only' => ['invoicepartpaid']]);
         $this->middleware('perimission:الفواتير الغير مدفوعة', ['only' => ['invoiceunpaid']]);
         $this->middleware('perimission:تغير حالة الدفع', ['only' => ['stateedit','stateupdate']]);
         $this->middleware('perimission:حذف فاتورة', ['only' => ['destroy']]);
@@ -240,7 +240,6 @@ class InvoicesController extends Controller
     }
     public function invoicepartpaid()
     {
-
         $invoice = Invoices::where('Value_Status',3)->get();
         return view('invoices.invoices_partpaid' , compact('invoice'));
     }
