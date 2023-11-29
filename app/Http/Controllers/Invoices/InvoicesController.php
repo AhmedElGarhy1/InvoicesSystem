@@ -108,10 +108,9 @@ class InvoicesController extends Controller
             $image_name = $request->pic->getClientOriginalName();
             $request->pic->move(public_path('invoices/'.$invoice_number),$image_name);
 
-            session()->flash('Add', 'تم اضافة القسم بنجاح ');
-            return redirect()->route('invoiceslist');
         }
-        return 3;
+        session()->flash('Add', 'تم اضافة القسم بنجاح ');
+        return redirect()->route('invoiceslist');
     }
 
     public function getproduct($id)

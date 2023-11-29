@@ -8,6 +8,7 @@ use App\Http\Controllers\Invoices\InvoicesController;
 use App\Http\Controllers\Invoices\InvoicesArchiveController;
 use App\Http\Controllers\Invoices\InvoicesDetailsController;
 use App\Http\Controllers\Invoices\InvoicesAttachmentController;
+use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 
@@ -121,4 +122,12 @@ Route::group(['middleware' => ['auth']], function () {
         Route::PATCH('/update/{id}', [UserController::class, 'update'])->name('updateusers');
         Route::delete('/delete/{id}', [UserController::class, 'destroy'])->name('deleteusers');
     });
+});
+
+
+// reports
+Route::prefix('reports')->group(function () {
+    Route::get('/invoices',[ReportsController::class,'reportsInvoicesindex'])->name('reportsinvoice');
+    Route::post('/invoices/search',[ReportsController::class,'reportsInvoicessearch'])->name('reportsinvoicesearch');
+    Route::get('/customer',[ReportsController::class,'reportsCustomer'])->name('reportscustomer');
 });
