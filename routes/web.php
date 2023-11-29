@@ -129,5 +129,6 @@ Route::group(['middleware' => ['auth']], function () {
 Route::prefix('reports')->group(function () {
     Route::get('/invoices',[ReportsController::class,'reportsInvoicesindex'])->name('reportsinvoice');
     Route::post('/invoices/search',[ReportsController::class,'reportsInvoicessearch'])->name('reportsinvoicesearch');
-    Route::get('/customer',[ReportsController::class,'reportsCustomer'])->name('reportscustomer');
+    Route::get('/customer',[ReportsController::class,'reportsCustomerindex'])->name('reportscustomer');
+    Route::post('/customer/search',[ReportsController::class,'reportsCustomersearch'])->name('reportscustomersearch');
 });

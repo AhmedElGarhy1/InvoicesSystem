@@ -15,7 +15,7 @@
     <link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
 
 @section('title')
-    تقرير العملاء - مورا سوفت للادارة الفواتير
+    تقرير العملاء
 @stop
 @endsection
 @section('page-header')
@@ -55,10 +55,8 @@
 
             <div class="card-header pb-0">
 
-                <form action="/Search_customers" method="POST" role="search" autocomplete="off">
-                    {{ csrf_field() }}
-
-
+                <form action="{{ route('reportscustomersearch') }}" method="POST" role="search" autocomplete="off">
+                    @csrf
                     <div class="row">
 
                         <div class="col">
@@ -115,7 +113,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    @if (isset($details))
+                    @if (isset($invoices))
                         <table id="example" class="table key-buttons text-md-nowrap" style=" text-align: center">
                             <thead>
                                 <tr>
@@ -135,17 +133,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $i = 0; ?>
-                                @foreach ($details as $invoice)
-                                    <?php $i++; ?>
+                                @foreach ($invoices as $invoice)
                                     <tr>
-                                        <td>{{ $i }}</td>
+                                        <td>{{ $loop->iteration }}</td>
                                         <td>{{ $invoice->invoice_number }} </td>
                                         <td>{{ $invoice->invoice_Date }}</td>
                                         <td>{{ $invoice->Due_date }}</td>
                                         <td>{{ $invoice->product }}</td>
                                         <td><a
-                                                href="{{ url('InvoicesDetails') }}/{{ $invoice->id }}">{{ $invoice->section->section_name }}</a>
+                                            href="{{ route('invoicedetails',$invoice->id) }}">{{ $invoice->section->section_name }}</a>
                                         </td>
                                         <td>{{ $invoice->Discount }}</td>
                                         <td>{{ $invoice->Rate_VAT }}</td>
@@ -232,7 +228,7 @@
             var SectionId = $(this).val();
             if (SectionId) {
                 $.ajax({
-                    url: "{{ URL::to('section') }}/" + SectionId,
+                    url: "{{ URL::to('invoices/product') }}/" + SectionId,
                     type: "GET",
                     dataType: "json",
                     success: function(data) {
