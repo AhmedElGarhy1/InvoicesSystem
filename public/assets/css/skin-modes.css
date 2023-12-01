@@ -146,7 +146,7 @@
 
 @media only screen and (max-width: 991px) {
   .horizontal-gradient .horizontalMenu > .horizontalMenu-list {
-    background: linear-gradient(to left, #0db2de 0%, #005bea 100%); }
+    background: linear-gradient(to left, #9B4999 0%, #9B4999 100%); }
     .horizontal-gradient .horizontalMenu > .horizontalMenu-list > li > ul.sub-menu {
       background-color: transparent;
       margin: 0px; }
@@ -324,7 +324,7 @@ body.dark-theme.body-style1 {
   border-bottom-color: rgba(255, 255, 255, 0.1); }
 
 .body-style1.horizontal-gradient .horizontal-main.hor-menu {
-  background: linear-gradient(to left, #0db2de 0%, #005bea 100%);
+  background: linear-gradient(to left, #9B4999 0%, #9B4999 100%);
   box-shadow: none;
   border-top: 1px solid rgba(255, 255, 255, 0.1); }
 

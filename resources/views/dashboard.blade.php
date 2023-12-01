@@ -148,7 +148,7 @@
                     </div>
                     <p class="tx-12 text-muted mb-0">اجمالي النسب المئويه لكل حاله من حالات الفواتير</p>
                 </div>
-                <div class="card-body" style="width: 100%">
+                <div class="card-body" style="width: 80%">
                     {!! $barchart->render() !!}
                 </div>
             </div>
@@ -156,7 +156,7 @@
         <div class="col-lg-12 col-xl-5">
             <div class="card card-dashboard-map-one">
                 <label class="main-content-label">نسب الفواتير</label>
-                <div class="" style="width: 100%">
+                <div class="" style="width: 80%">
                     {!! $piechart->render() !!}
                 </div>
             </div>

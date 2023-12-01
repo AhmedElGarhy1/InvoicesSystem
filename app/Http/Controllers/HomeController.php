@@ -29,17 +29,17 @@ class HomeController extends Controller
             ->datasets([
                 [
                     "label" => "الفواتير المدفوعه",
-                    'backgroundColor' => ['#28a745'],
+                    'backgroundColor' => ['#BC8DB9'],
                     'data' => [$presentpaiedInvoices]
                 ],
                 [
                     "label" => "الفواتير الغير مدفوعه",
-                    'backgroundColor' => ['#dc3545'],
+                    'backgroundColor' => ['#00C9C6'],
                     'data' => [$presentunpaiedInvoices]
                 ],
                 [
                     "label" => "الفواتير المدفوعه جزئيا",
-                    'backgroundColor' => ['#ffc107'],
+                    'backgroundColor' => ['#FFE6FF'],
                     'data' => [$presentpartpaiedInvoices]
                 ]
             ])
@@ -73,7 +73,7 @@ class HomeController extends Controller
             ->labels(["الفواتير المدفوعه","الفواتير الغير مدفوعه","الفواتير المدفوعه جزئيا"])
             ->datasets([
                 [
-                    'backgroundColor' => ['#28a745', '#dc3545','#ffc107'],
+                    'backgroundColor' => ['#BC8DB9', '#00C9C6','#FFE6FF'],
                     'hoverBackgroundColor' => ['#008000', '#FF0000','#FFFF00'],
                     'data' => [$presentpaiedInvoices, $presentunpaiedInvoices,$presentpartpaiedInvoices]
                 ]
