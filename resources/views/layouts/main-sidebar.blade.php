@@ -3,7 +3,7 @@
 <aside class="app-sidebar sidebar-scroll">
     <div class="main-sidebar-header active">
         <a class="desktop-logo logo-light active" href="{{ url('/' . ($page = 'index')) }}"><img
-                src="{{ URL::asset('assets/img/brand/logo.png') }}" class="main-logo" alt="logo"></a>
+                src="{{ URL::asset('assets/img/brand/logoinvoices.png') }}" class="main-logo" alt="logo"></a>
         <a class="desktop-logo logo-dark active" href="{{ url('/' . ($page = 'index')) }}"><img
                 src="{{ URL::asset('assets/img/brand/logo-white.png') }}" class="main-logo dark-theme"
                 alt="logo"></a>
