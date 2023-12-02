@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Invoices;
 use App\Models\Sections;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 
 class HomeController extends Controller
 {
@@ -104,5 +105,15 @@ class HomeController extends Controller
             'barchart',
             'piechart'
         ));
+    }
+
+
+    public function makeAsRead_all(Request $request)
+    {
+        $userunreadnotification = auth()->user()->unreadNotifications;
+        if($userunreadnotification){
+            $userunreadnotification->markAsRead();
+            return back();
+        }
     }
 }

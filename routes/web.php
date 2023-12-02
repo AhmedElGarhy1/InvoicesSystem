@@ -78,6 +78,9 @@ Route::prefix('invoices')->group(function () {
     // print invoice
     Route::get('/Print/{id}',[InvoicesController::class,'PrintInvoice'])->name('invoiceprint');
 
+    // notification (make as read)
+    Route::get('/makereadall',[HomeController::class,'makeAsRead_all'])->name('makeasreadall');
+
 });
 
 // sections
