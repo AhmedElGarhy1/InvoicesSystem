@@ -13,7 +13,8 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="left-content">
             <div>
-                <h2 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">اهلا ! مرحبا بك </h2>
+                <h2 class="main-content-title tx-24 mg-b-1 mg-b-lg-1" style="color: #9B4999" > مرحبا بك
+                    &hearts;</h2>
                 <p class="mg-b-0">برنامج تحصيل الفواتير من العملاء</p>
             </div>
         </div>
@@ -143,10 +144,11 @@
             <div class="card">
                 <div class="card-header bg-transparent pd-b-0 pd-t-20 bd-b-0">
                     <div class="d-flex justify-content-between">
-                        <h4 class="card-title mb-0">نسبه  كل حاله في الفواتير</h4>
+                        <h4 class="card-title mb-0" style="color: #9B4999">نسبه  كل حاله في الفواتير</h4>
                         <i class="mdi mdi-dots-horizontal text-gray"></i>
                     </div>
-                    <p class="tx-12 text-muted mb-0">اجمالي النسب المئويه لكل حاله من حالات الفواتير</p>
+                    <p class="tx-12 text-muted mb-0" style="color: #9B4999"
+                    >اجمالي النسب المئويه لكل حاله من حالات الفواتير</p>
                 </div>
                 <div class="card-body" style="width: 80%">
                     {!! $barchart->render() !!}
@@ -155,7 +157,7 @@
         </div>
         <div class="col-lg-12 col-xl-5">
             <div class="card card-dashboard-map-one">
-                <label class="main-content-label">نسب الفواتير</label>
+                <label class="main-content-label" style="color: #9B4999">نسب الفواتير</label>
                 <div class="" style="width: 80%">
                     {!! $piechart->render() !!}
                 </div>

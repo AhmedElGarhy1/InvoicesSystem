@@ -9,7 +9,7 @@ $(function(e){
 		selectedColor: '#666666',
 		enableZoom: true,
 		showTooltip: true,
-		scaleColors: ['#00b9ff','#7550f6'],
+		scaleColors: ['#BC8DB9','#7550f6'],
 		values: sample_data,
 		normalizeFunction: 'polynomial'
 	});

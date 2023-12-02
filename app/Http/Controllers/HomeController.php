@@ -74,7 +74,7 @@ class HomeController extends Controller
             ->datasets([
                 [
                     'backgroundColor' => ['#BC8DB9', '#00C9C6','#FFE6FF'],
-                    'hoverBackgroundColor' => ['#008000', '#FF0000','#FFFF00'],
+                    'hoverBackgroundColor' => ['#BC8DB9', '#00C9C6','#FFE6FF'],
                     'data' => [$presentpaiedInvoices, $presentunpaiedInvoices,$presentpartpaiedInvoices]
                 ]
             ])
