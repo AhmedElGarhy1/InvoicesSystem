@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Invoices;
 
+use App\Models\User;
 use App\Models\Invoices;
 use App\Models\Sections;
 use Illuminate\Http\Request;
@@ -11,6 +12,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Invoices_attachment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\AddinvoicesNotification;
 
 class InvoicesController extends Controller
 {
@@ -93,7 +96,7 @@ class InvoicesController extends Controller
         ]);
 
         // insert in table invoices_attachment
-        $invoice_id = invoices::latest()->first()->id;
+        $invoices = invoices::latest()->first();
         $image = $request->file('pic');
         $invoice_number = $request->invoice_number;
         if ($image) {
@@ -102,13 +105,16 @@ class InvoicesController extends Controller
                 'file_name' => $filename,
                 'invoice_number' => $request->invoice_number,
                 'Created_by' => (Auth::user()->name),
-                'invoice_id' => $invoice_id,
+                'invoice_id' => $invoices->id,
             ]);
 
             $image_name = $request->pic->getClientOriginalName();
             $request->pic->move(public_path('invoices/'.$invoice_number),$image_name);
 
         }
+        $user = User::get();
+        Notification::send($user,new AddinvoicesNotification($invoices));
+
         session()->flash('Add', 'تم اضافة القسم بنجاح ');
         return redirect()->route('invoiceslist');
     }
