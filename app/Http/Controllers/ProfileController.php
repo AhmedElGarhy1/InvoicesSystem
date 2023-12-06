@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\View\View;
+use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\User;
 
 class ProfileController extends Controller
 {
@@ -32,9 +34,28 @@ class ProfileController extends Controller
             $request->user()->email_verified_at = null;
         }
 
-        $request->user()->save();
+        $image = $request->image;
+        $user = User::find(Auth::User()->id);
+        if(isset($image)){
+            $lastimage = Auth::User()->image;
+            File::delete("image/$lastimage");
+            $imaName = time().'.'.$image->extension();
+            $imageName = "image/$imaName";
+            $image->move(public_path('image'), $imageName);
+        }else{
+            if(isset(Auth::User()->image)){
+                $imageName = Auth::User()->image;
+            }else{
+                $imageName = 'image/defultimage.png';
+            }
+        }
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        $user->update([
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'image'=>$imageName
+        ]);
+        return Redirect::route('dashboard')->with('status', 'profile-updated');
     }
 
     /**

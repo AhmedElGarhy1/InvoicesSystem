@@ -1,17 +1,18 @@
 <?php
 
-use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\SectionsController;
+use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Invoices\InvoicesController;
 use App\Http\Controllers\Invoices\InvoicesArchiveController;
 use App\Http\Controllers\Invoices\InvoicesDetailsController;
 use App\Http\Controllers\Invoices\InvoicesAttachmentController;
-use App\Http\Controllers\ReportsController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\RoleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -127,10 +128,16 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 
-// reports
-Route::prefix('reports')->group(function () {
-    Route::get('/invoices',[ReportsController::class,'reportsInvoicesindex'])->name('reportsinvoice');
-    Route::post('/invoices/search',[ReportsController::class,'reportsInvoicessearch'])->name('reportsinvoicesearch');
-    Route::get('/customer',[ReportsController::class,'reportsCustomerindex'])->name('reportscustomer');
-    Route::post('/customer/search',[ReportsController::class,'reportsCustomersearch'])->name('reportscustomersearch');
-});
+    // reports
+    Route::prefix('reports')->group(function () {
+        Route::get('/invoices',[ReportsController::class,'reportsInvoicesindex'])->name('reportsinvoice');
+        Route::post('/invoices/search',[ReportsController::class,'reportsInvoicessearch'])->name('reportsinvoicesearch');
+        Route::get('/customer',[ReportsController::class,'reportsCustomerindex'])->name('reportscustomer');
+        Route::post('/customer/search',[ReportsController::class,'reportsCustomersearch'])->name('reportscustomersearch');
+    });
+
+    //profile
+    Route::prefix('reports')->group(function () {
+        Route::get('/edit/{id}',[ProfileController::class,'edit'])->name('editeprofile');
+        Route::post('/update/{id}',[ProfileController::class,'update'])->name('updateprofile');
+    });

@@ -26,9 +26,8 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $data = User::orderBy('id', 'DESC')->paginate(5);
-        return view('users.index_list', compact('data'))
-            ->with('i', ($request->input('page', 1) - 1) * 5);
+        $data = User::orderBy('id', 'DESC')->paginate(10);
+        return view('users.index_list', compact('data'));
     }
 
 
@@ -54,15 +53,27 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|same:confirm-password',
-            'roles_name' => 'required'
+            'roles_name' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg|max:2048'
         ]);
 
-        $input = $request->all();
+        $image = $request->image;
+        if(isset($image)){
+            $imageName = time().'.'.$image->extension();  
+            $image->move(public_path('image'), $imageName);
+        }else{
+            $imageName = "defultimage.png";
+        }
 
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'image' =>"image/$imageName",
+            'roles_name' => $request->roles_name,
+            'Status' => $request->Status
+        ]);
 
-        $input['password'] = Hash::make($input['password']);
-
-        $user = User::create($input);
         $user->assignRole($request->input('roles_name'));
         return redirect()->route('listusers')
             ->with('success', 'تم اضافة المستخدم بنجاح');

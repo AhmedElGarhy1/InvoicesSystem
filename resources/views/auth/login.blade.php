@@ -19,7 +19,7 @@
                         <div class="row">
                             <div class="col-md-10 col-lg-10 col-xl-9 mx-auto">
                                 <div class="card-sigin">
-                                    <div class="mb-5 d-flex"> <a href="{{ url('/' . ($page = 'Home')) }}"><img
+                                    <div class="mb-5 d-flex"> <a href="/"><img
                                                 src="{{ URL::asset('assets/img/brand/favicon.png') }}"
                                                 class="sign-favicon ht-40" alt="logo"></a>
                                         <h1 class="main-logo1 ml-1 mr-0 my-auto tx-28" style="color: #9B4999">System<span> </span>Invoices</h1>
@@ -73,6 +73,12 @@
                                                     {{ __('تسجيل الدخول') }}
                                                 </button>
                                             </form>
+                                            <br>
+                                            <a href="{{ route('register') }}">
+                                                <button type="submit" class="btn btn-main-primary btn-block">
+                                                    {{ __('انشاء حساب') }}
+                                                </button>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>

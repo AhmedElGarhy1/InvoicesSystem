@@ -81,7 +81,7 @@
                                     </div>
                                 </a>
                                 @endforeach
-                                
+
                             </div>
                             <div class="dropdown-footer">
                                 <a href="">VIEW ALL</a>
@@ -101,22 +101,19 @@
                 </div>
                 <div class="dropdown main-profile-menu nav nav-item nav-link">
                     <a class="profile-user d-flex" href=""><img alt=""
-                            src="{{ URL::asset('assets/img/faces/6.jpg') }}"></a>
+                        src={{ asset(Auth::User()->image) }}></a>
                     <div class="dropdown-menu">
                         <div class="main-header-profile bg-primary p-3">
                             <div class="d-flex wd-100p">
                                 <div class="main-img-user"><img alt=""
-                                        src="{{ URL::asset('assets/img/faces/6.jpg') }}" class=""></div>
+                                    src={{ asset(Auth::User()->image) }} class=""></div>
                                 <div class="mr-3 my-auto">
                                     <h6>{{ Auth::User()->name }}</h6><span>{{ Auth::User()->email }}</span>
                                 </div>
                             </div>
                         </div>
-                        <a class="dropdown-item" href=""><i class="bx bx-user-circle"></i>Profile</a>
-                        <a class="dropdown-item" href=""><i class="bx bx-cog"></i> Edit Profile</a>
-                        <a class="dropdown-item" href=""><i class="bx bxs-inbox"></i>Inbox</a>
-                        <a class="dropdown-item" href=""><i class="bx bx-envelope"></i>Messages</a>
-                        <a class="dropdown-item" href=""><i class="bx bx-slider-alt"></i> Account Settings</a>
+                        <a class="dropdown-item" href="{{route('showuser', Auth::User()->id)}}"><i class="bx bx-user-circle"></i>Profile</a>
+                        <a class="dropdown-item" href="{{route('editeprofile', Auth::User()->id)}}"><i class="bx bx-cog"></i> Edit Profile</a>
                         <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i
                                 class="bx bx-log-out"></i>تسجيل خروج</a>

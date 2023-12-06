@@ -1,31 +1,31 @@
 <section>
     <header>
-        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-            {{ __('Profile Information') }}
+        <h2 class="text-lg font-medium text-primary dark:text-purple-100" >
+            {{ __('البيانات الشخصيه') }}
         </h2>
 
-        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+        {{--  <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
             {{ __("Update your account's profile information and email address.") }}
-        </p>
+        </p>  --}}
     </header>
 
-    <form id="send-verification" method="post" action="{{ route('verification.send') }}">
+    {{--  <form id="send-verification" method="post" action="{{ route('verification.send') }}">
         @csrf
-    </form>
+    </form>  --}}
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    <form method="POST" action="{{ route('updateprofile', $user->id) }}" class="mt-6 space-y-6" enctype="multipart/form-data">
         @csrf
-        @method('patch')
+        {{--  @method('patch')  --}}
 
         <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
+            <x-input-label for="name" :value="__('الاسم : ')"  class="text-primary"/>
+            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full text-primary" :value="old('name', $user->name)" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
 
         <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
+            <x-input-label for="email" :value="__('الايميل : ')" class="text-primary" />
+            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full text-primary" :value="old('email', $user->email)" required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
 
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
@@ -47,8 +47,14 @@
             @endif
         </div>
 
-        <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+        <div>
+            <x-input-label for="image" :value="__('الصوره الشخصيه : ')" class="text-primary" />
+            <x-text-input id="image" name="image" type="file" class="mt-1 block w-full text-primary" :value="old('image', $user->image)" />
+            <x-input-error class="mt-2" :messages="$errors->get('image')" />
+        </div>
+
+        <div class="flex items-center gap-4 ">
+            <x-primary-button>{{ __('حفظ') }}</x-primary-button>
 
             @if (session('status') === 'profile-updated')
                 <p
